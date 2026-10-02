@@ -115,3 +115,15 @@ bash scripts/reproduce_scgpt_kang.sh
 bash scripts/reproduce_scgpt_pbmc.sh
 bash scripts/reproduce_geneformer_kang.sh
 bash scripts/reproduce_geneformer_pbmc.sh
+
+## Citation
+
+If you use this work, please cite:
+
+```bibtex
+@inproceedings{kim2027adagenebudget,
+  title     = {AdaGeneBudget: Cell-Adaptive Gene-Token Allocation for Efficient Single-Cell Foundation Models},
+  author    = {Kim, Dohee and Hwang, Uiwon},
+  booktitle = {Pacific Symposium on Biocomputing 2027},
+  year      = {2027}
+}
