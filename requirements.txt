@@ -1,0 +1,11 @@
+# Shared experiment dependencies.
+numpy
+scipy
+pandas
+anndata
+scikit-learn
+torch
+transformers
+pytest
+
+# Install the official scGPT/Geneformer repositories separately; see third_party/README.md.

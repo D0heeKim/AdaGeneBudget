@@ -1,0 +1,43 @@
+AdaGeneBudget/
+├── README.md
+├── PROVENANCE.md
+├── pyproject.toml
+├── requirements.txt
+├── .gitignore
+├── src/adagenebudget/
+│   ├── __init__.py
+│   ├── core.py
+│   ├── idf.py
+│   ├── scoring.py
+│   ├── budget.py
+│   ├── selection.py
+│   ├── baselines.py
+│   └── backends/
+│       ├── __init__.py
+│       ├── scgpt.py
+│       └── geneformer.py
+├── experiments/
+│   ├── scgpt/
+│   │   ├── _shared/
+│   │   ├── kang/
+│   │   └── pbmc/
+│   └── geneformer/
+│       ├── kang/
+│       └── pbmc/
+├── scripts/
+│   ├── check_setup.py
+│   ├── reproduce_scgpt_kang.sh
+│   ├── reproduce_scgpt_pbmc.sh
+│   ├── reproduce_geneformer_kang.sh
+│   ├── reproduce_geneformer_pbmc.sh
+│   └── reproduce_tables_1_2.sh
+├── data/README.md
+├── checkpoints/README.md
+├── third_party/README.md
+├── results/
+│   ├── README.md
+│   ├── paper_table1.csv
+│   └── paper_table2.csv
+└── tests/
+    ├── test_core.py
+    └── test_semantics.py

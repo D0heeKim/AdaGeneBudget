@@ -1,0 +1,30 @@
+# Local upstream repositories / symlinks
+/scGPT
+/Geneformer
+/scPRINT
+
+# Data and checkpoints (keep README files)
+data/*
+!data/README.md
+checkpoints/*
+!checkpoints/README.md
+
+# Runtime outputs
+outputs/
+logs/
+
+# Large scientific artifacts
+*.h5ad
+*.pt
+*.pth
+*.ckpt
+*.npy
+*.npz
+
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ipynb_checkpoints/
+.venv/
+.env
