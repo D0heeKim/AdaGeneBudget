@@ -1,5 +1,7 @@
 # AdaGeneBudget
 
+For additional experimental details, ablations, and supplementary results, please see [`AdaGeneBudget_Supplementary_material.pdf`](./AdaGeneBudget_Supplementary_material.pdf).
+
 Official implementation and reproduction code for  
 **AdaGeneBudget: Cell-Adaptive Gene-Token Allocation for Efficient Single-Cell Foundation Models**.
 
