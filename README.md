@@ -1,6 +1,7 @@
 # AdaGeneBudget
 
-Code release candidate for **AdaGeneBudget: Cell-Adaptive Gene-Token Allocation for Efficient Single-Cell Foundation Models**.
+Official implementation and reproduction code for  
+**AdaGeneBudget: Cell-Adaptive Gene-Token Allocation for Efficient Single-Cell Foundation Models**.
 
 AdaGeneBudget is a training-free gene-token selection method for frozen single-cell foundation models. It combines per-cell expression with reference-derived inverse detection-frequency (IDF) weights, ranks expressed genes by the resulting expression-specificity score, and keeps the shortest prefix whose cumulative score mass reaches a target threshold subject to minimum and maximum token budgets.
 
@@ -17,30 +18,19 @@ K_max = 600
 
 ```text
 AdaGeneBudget/
-├── src/adagenebudget/          # reusable, backbone-independent method code
-│   ├── core.py
-│   ├── idf.py
-│   ├── scoring.py
-│   ├── budget.py
-│   ├── selection.py
-│   ├── baselines.py
-│   └── backends/
-│       ├── scgpt.py
-│       └── geneformer.py
+├── src/adagenebudget/          # reusable AdaGeneBudget implementation
 ├── experiments/
 │   ├── scgpt/
-│   │   ├── _shared/            # validated scGPT experiment utilities
 │   │   ├── kang/
 │   │   └── pbmc/
 │   └── geneformer/
 │       ├── kang/
 │       └── pbmc/
-├── scripts/                    # reproduction order / setup checks
+├── scripts/                    # reproduction entry points
 ├── data/README.md              # expected local data layout
 ├── checkpoints/README.md       # expected checkpoint layout
 ├── third_party/README.md       # external scGPT/Geneformer repositories
-├── tests/                      # lightweight method-level tests
-└── PROVENANCE.md               # mapping from original research scripts
+└── tests/                      # lightweight method-level tests
 ```
 
 Large datasets, model checkpoints, generated caches, and upstream scGPT/Geneformer source trees are intentionally **not committed**.
@@ -109,3 +99,17 @@ Before running experiments, check the local layout:
 ```bash
 python scripts/check_setup.py
 ```
+
+After the setup check passes, run the experiments for each backbone–dataset pair. 
+
+The scripts reproduce the main efficiency and reference-mapping experiments for:
+- scGPT on Kang
+- scGPT on PBMC
+- Geneformer on Kang
+- Geneformer on PBMC
+
+```bash
+bash scripts/reproduce_scgpt_kang.sh
+bash scripts/reproduce_scgpt_pbmc.sh
+bash scripts/reproduce_geneformer_kang.sh
+bash scripts/reproduce_geneformer_pbmc.sh
