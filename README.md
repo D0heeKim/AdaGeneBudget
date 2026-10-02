@@ -12,7 +12,6 @@ K_min = 128
 K_max = 600
 ```
 
-This repository currently focuses on the experiments needed for the camera-ready **Table 1 (efficiency)** and **Table 2 (reference-mapping annotation)** for scGPT and Geneformer on Kang and PBMC.
 
 ## Repository layout
 
@@ -40,7 +39,6 @@ AdaGeneBudget/
 ├── data/README.md              # expected local data layout
 ├── checkpoints/README.md       # expected checkpoint layout
 ├── third_party/README.md       # external scGPT/Geneformer repositories
-├── results/                    # camera-ready Table 1/2 reference values
 ├── tests/                      # lightweight method-level tests
 └── PROVENANCE.md               # mapping from original research scripts
 ```
@@ -105,60 +103,9 @@ AdaGeneBudget/
 └── data/
 ```
 
-For example:
-
-```bash
-ln -s /path/to/scGPT ./scGPT
-ln -s /path/to/Geneformer ./Geneformer
-```
-
-The root `.gitignore` excludes these local clones/symlinks, model weights, raw datasets, generated caches, and experiment outputs.
 
 Before running experiments, check the local layout:
 
 ```bash
 python scripts/check_setup.py
 ```
-
-## Table 1 / Table 2 reproduction
-
-Run commands from the repository root. Detailed per-backbone notes are in each experiment directory.
-
-```bash
-bash scripts/reproduce_scgpt_kang.sh
-bash scripts/reproduce_scgpt_pbmc.sh
-bash scripts/reproduce_geneformer_kang.sh
-bash scripts/reproduce_geneformer_pbmc.sh
-```
-
-To run all four sequentially:
-
-```bash
-bash scripts/reproduce_tables_1_2.sh
-```
-
-The camera-ready reference values are provided in:
-
-```text
-results/paper_table1.csv
-results/paper_table2.csv
-```
-
-## Why the paper drivers still contain some duplicated selection logic
-
-The reusable implementation in `src/adagenebudget/` extracts the final method semantics into a clean package. The paper reproduction drivers, however, are intentionally kept close to the validated scripts that produced the reported results.
-
-A full rewrite of every timing/cache driver to call the package directly could silently change RNG streams, boundary-tie behavior, cache order, batching, or timing scope. Therefore this release uses two layers:
-
-1. **Clean reusable method implementation:** `src/adagenebudget/`
-2. **Provenance-preserving paper drivers:** `experiments/`
-
-Once the reorganized repository has reproduced the published results end-to-end on the original data/checkpoints, the drivers can be migrated further to the shared package under explicit equivalence tests.
-
-See `PROVENANCE.md` for the original-to-release mapping.
-
-## Current release-candidate checks
-
-The repository can be syntax-compiled without the external model repositories, and the core unit tests exercise the IDF formula, adaptive cutoff/bounds, matched fixed budget, scGPT native-order restoration, and Geneformer native reordering.
-
-Full end-to-end reproduction still requires the original datasets, processed split artifacts, pretrained checkpoints, external model repositories, and CUDA environment described in the experiment scripts.
